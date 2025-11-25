@@ -48,10 +48,10 @@ export const Proposal: React.FC = () => {
   const handleThinkClick = () => {
     setShowThinkError(true);
     setTimeout(() => {
-        // Scroll to top as penalty
+        // Scroll to top as penalty after 5 seconds
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        setTimeout(() => setShowThinkError(false), 2000);
-    }, 2500);
+        setShowThinkError(false);
+    }, 5000);
   };
 
   return (
@@ -129,7 +129,7 @@ export const Proposal: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-red-500 font-bold bg-red-50 p-4 rounded-lg border border-red-200 mt-4"
                   >
-                      Tu tem 15 segundos para pensar e voltar pro início!
+                      Tu tem 15 segundos para pensar. Vou te mandar de volta pro início!
                   </motion.div>
               )}
             </motion.div>

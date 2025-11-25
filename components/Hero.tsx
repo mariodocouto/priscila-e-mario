@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, Heart } from 'lucide-react';
 
+const AUDIO_URL = "https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3"; // Som de brilho mágico suave
+
 export const Hero: React.FC = () => {
   const [showSubtitle, setShowSubtitle] = useState(false);
   const [showButton, setShowButton] = useState(false);
@@ -16,7 +18,16 @@ export const Hero: React.FC = () => {
     };
   }, []);
 
-  const scrollToTimeline = () => {
+  const handleStart = () => {
+    // Play subtle sound
+    try {
+      const audio = new Audio(AUDIO_URL);
+      audio.volume = 0.4; // Volume baixo para ser sutil
+      audio.play().catch((e) => console.log("Audio play blocked by browser", e));
+    } catch (error) {
+      console.error("Audio error", error);
+    }
+
     const timeline = document.getElementById('timeline-section');
     timeline?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -67,7 +78,7 @@ export const Hero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={scrollToTimeline}
+          onClick={handleStart}
           className="mt-8 px-8 py-4 bg-rose-500 text-white rounded-full text-lg font-medium shadow-lg hover:bg-rose-600 transition-colors flex items-center gap-2 group"
         >
           Começar
